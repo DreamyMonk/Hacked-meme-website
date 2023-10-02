@@ -1,10 +1,51 @@
-const startBtn = document.getElementById('start');
+// ... [rest of your code]
 
-// Add click event listener
-startBtn.addEventListener('click', () => {
+// Function to enter fullscreen mode
+const openFullscreen = (elem) => {
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        elem.msRequestFullscreen();
+    }
+}
 
-  // Request fullscreen on click
-  document.documentElement.requestFullscreen();
+// Function to exit fullscreen mode
+const closeFullscreen = () => {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) { /* Firefox */
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE/Edge */
+        document.msExitFullscreen();
+    }
+}
+
+// Capture and prevent the escape key from being pressed
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+        e.preventDefault();
+    }
+});
+
+start.onclick = async () => {
+    openFullscreen(document.documentElement);  // Enter fullscreen mode
+    // ... [rest of your start.onclick function]
+};
+
+video.onended = () => {
+    closeFullscreen();  // Exit fullscreen mode
+    video.style.display = "none";
+    step = -Infinity;
+};
+
+// ... [rest of your code]
+
 
 
 window.onload = async () => {
@@ -125,10 +166,10 @@ window.onload = async () => {
         };
 
          video.onended = () => {
-    document.exitFullscreen();
-    
+    closeFullscreen();  // Exit fullscreen mode
     video.style.display = "none";
-  };
+    step = -Infinity;
+};
 
 
     } catch (e) {
