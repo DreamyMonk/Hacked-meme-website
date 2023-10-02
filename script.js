@@ -1,4 +1,3 @@
-
 // Function to enter fullscreen mode
 const openFullscreen = (elem) => {
     if (elem.requestFullscreen) {
@@ -25,8 +24,7 @@ const closeFullscreen = () => {
         document.msExitFullscreen();
     }
 }
-
-
+  };
 window.onload = async () => {
 
   const video = document.getElementById("video");
