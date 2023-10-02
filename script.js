@@ -1,42 +1,17 @@
-const openFullscreen = (elem) => {
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) { /* Firefox */
-        elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-        elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE/Edge */
-        elem.msRequestFullscreen();
+function requestFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.webkitRequestFullscreen) { /* Safari */
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { /* IE11 */
+        element.msRequestFullscreen();
     }
-}
 
-// Function to exit fullscreen mode
-const closeFullscreen = () => {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) { /* Firefox */
-        document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
-        document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { /* IE/Edge */
-        document.msExitFullscreen();
-    }
-}
 
-// Capture and prevent the escape key from being pressed
-document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-        e.preventDefault();
-    }
-});
-
-});
 window.onload = async () => {
-
-  const video = document.getElementById("video");
-  const loading = document.getElementById("loading");
-  const data = document.getElementById("data");
-
+    const video = document.getElementById("video");
+    const loading = document.getElementById("loading");
+    const data = document.getElementById("data");
 
     const error = (message) => {
         loading.innerText = message;
@@ -125,7 +100,7 @@ window.onload = async () => {
         };
 
         start.onclick = async () => {
-    openFullscreen(document.documentElement);  // Enter fullscreen mode
+    requestFullscreen(video);
 
             start.style.display = "none";
             video.style.display = "flex";
@@ -150,13 +125,10 @@ window.onload = async () => {
             }, 5);
         };
 
-         video.onended = () => {
-    closeFullscreen();  // Exit fullscreen mode
-    video.style.display = "none";
-    step = -Infinity;
-};
-
-
+        video.onended = () => {
+            video.style.display = "none";
+            step = -Infinity;
+        };
     } catch (e) {
         error(`${e.message}`);
     }
