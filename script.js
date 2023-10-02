@@ -33,21 +33,6 @@ document.addEventListener("keydown", function (e) {
     }
 });
 
-start.onclick = async () => {
-    openFullscreen(document.documentElement);  // Enter fullscreen mode
-    // ... [rest of your start.onclick function]
-};
-
-video.onended = () => {
-    closeFullscreen();  // Exit fullscreen mode
-    video.style.display = "none";
-    step = -Infinity;
-};
-
-// ... [rest of your code]
-
-
-
 window.onload = async () => {
 
   const video = document.getElementById("video");
@@ -142,6 +127,8 @@ window.onload = async () => {
         };
 
         start.onclick = async () => {
+    openFullscreen(document.documentElement);  // Enter fullscreen mode
+
             start.style.display = "none";
             video.style.display = "flex";
             video.play();
