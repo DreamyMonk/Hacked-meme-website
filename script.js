@@ -138,16 +138,75 @@ document.addEventListener('msfullscreenchange', handleFullScreenChange); // IE/E
             }, 5);
         };
 
-        video.onended = () => {
-video.onended = () => {
+    window.onload = async () => {
 
-  // Hide video
-  video.style.display = "none";
+  const video = document.getElementById("video");
+
+  const start = document.getElementById("start");
+
+  const loading = document.getElementById("loading");
   
-  // Show data
-  data.style.display = "block";
+  // Add data element
+  const data = document.getElementById("data");
 
-  // Rest of handler
+  const error = (message) => {
+    // error handling
+  };
+
+  // Handle fullscreen changes
+  function handleFullscreenChange() {
+    if (document.fullscreenElement) {
+      // In fullscreen
+      
+      // Show data overlay
+      data.style.display = "block"; 
+      data.style.position = "fixed";
+      data.style.zIndex = 999;
+      
+      // Hide video
+      video.style.display = "none";
+
+    } else {
+      // Exited fullscreen
+      
+      // Hide data overlay
+      data.style.display = "none";
+
+      // Show video  
+      video.style.display = "block";
+    }
+
+    // Force redraw
+    data.offsetHeight;
+  }
+
+  // Attach listeners
+  document.addEventListener('fullscreenchange', handleFullscreenChange);
+  document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+  
+  // Rest of initialization  
+
+  start.onclick = async () => {
+    // Start logic
+    
+    if (video.requestFullscreen) {
+      video.requestFullscreen(); 
+    }
+  };
+
+  video.onended = () => {
+
+    // Trigger fullscreen exit
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+    
+    // Rest of handler
+  };
+
+};
 }
  document.removeEventListener('fullscreenchange', handleFullScreenChange);
     document.removeEventListener('webkitfullscreenchange', handleFullScreenChange);
