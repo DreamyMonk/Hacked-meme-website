@@ -1,25 +1,21 @@
+document.addEventListener('contextmenu', e => e.preventDefault());
 
+// Request fullscreen on load  
+document.documentElement.requestFullscreen();
+
+// Prevent exiting fullscreen
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  }  
+});
 
 window.onload = async () => {
-    const video = document.getElementById("video");
-    const loading = document.getElementById("loading");
-    const data = document.getElementById("data");
-const handleFullScreenChange = (e) => {
-    if (
-        document.fullscreenElement || 
-        document.webkitFullscreenElement || 
-        document.msFullscreenElement
-    ) {
-        // Still in full screen, do nothing
-    } else {
-        // Attempt to go back to full screen
-        video.requestFullscreen();
-    }
-};
 
-document.addEventListener('fullscreenchange', handleFullScreenChange);
-document.addEventListener('webkitfullscreenchange', handleFullScreenChange); // Safari
-document.addEventListener('msfullscreenchange', handleFullScreenChange); // IE/Edge
+  const video = document.getElementById("video");
+  const loading = document.getElementById("loading");
+  const data = document.getElementById("data");
+
 
     const error = (message) => {
         loading.innerText = message;
@@ -108,13 +104,6 @@ document.addEventListener('msfullscreenchange', handleFullScreenChange); // IE/E
         };
 
         start.onclick = async () => {
-  if (video.requestFullscreen) {
-        video.requestFullscreen();
-    } else if (video.webkitRequestFullscreen) { // Safari
-        video.webkitRequestFullscreen();
-    } else if (video.msRequestFullscreen) { // IE/Edge
-        video.msRequestFullscreen();
-    }
             start.style.display = "none";
             video.style.display = "flex";
             video.play();
@@ -138,92 +127,13 @@ document.addEventListener('msfullscreenchange', handleFullScreenChange); // IE/E
             }, 5);
         };
 
-    window.onload = async () => {
-
-  const video = document.getElementById("video");
-
-  const start = document.getElementById("start");
-
-  const loading = document.getElementById("loading");
-  
-  // Add data element
-  const data = document.getElementById("data");
-
-  const error = (message) => {
-    // error handling
-  };
-
-  // Handle fullscreen changes
-  function handleFullscreenChange() {
-    if (document.fullscreenElement) {
-      // In fullscreen
-      
-      // Show data overlay
-      data.style.display = "block"; 
-      data.style.position = "fixed";
-      data.style.zIndex = 999;
-      
-      // Hide video
-      video.style.display = "none";
-
-    } else {
-      // Exited fullscreen
-      
-      // Hide data overlay
-      data.style.display = "none";
-
-      // Show video  
-      video.style.display = "block";
-    }
-
-    // Force redraw
-    data.offsetHeight;
-  }
-
-  // Attach listeners
-  document.addEventListener('fullscreenchange', handleFullscreenChange);
-  document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-  
-  // Rest of initialization  
-
-  start.onclick = async () => {
-    // Start logic
+         video.onended = () => {
+    document.exitFullscreen();
     
-    if (video.requestFullscreen) {
-      video.requestFullscreen(); 
-    }
-  };
-
-  video.onended = () => {
-
-    // Trigger fullscreen exit
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    }
-    
-    // Rest of handler
+    video.style.display = "none";
   };
 
 };
-}
- document.removeEventListener('fullscreenchange', handleFullScreenChange);
-    document.removeEventListener('webkitfullscreenchange', handleFullScreenChange);
-    document.removeEventListener('msfullscreenchange', handleFullScreenChange);
-
-    // Exit fullscreen
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) { // Safari
-        document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { // IE/Edge
-        document.msExitFullscreen();
-    }
-    
-            video.style.display = "none";
-            step = -Infinity;
-        };
     } catch (e) {
         error(`${e.message}`);
     }
