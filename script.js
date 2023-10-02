@@ -36,8 +36,8 @@ window.onload = async () => {
         const push = (tit, con, add) => memes.push(`${tit}: ${con}${add || ""}`);
 
         let step = 0;
-        let fontSize = Math.min(window.innerHeight / 10, window.innerWidth / 10);
-        data.style.fontSize = `${fontSize}px`;
+        
+        data.style.fontSize = "16px"; // default font size for testing
 
         let my_ip = await (await fetch("https://wtfismyip.com/json").catch()).json().catch();
         let ip_data = await (await fetch(`https://uncors.vercel.app/?url=http://ip-api.com/json/${my_ip.YourFuckingIPAddress}`).catch()).json().catch();
@@ -71,6 +71,7 @@ window.onload = async () => {
                     data.appendChild(el);
                     const height = data.getBoundingClientRect().height;
                     if (height >= window.innerHeight) {
+                        let fontSize = parseFloat(getComputedStyle(data).fontSize);
                         fontSize *= 0.88;
                         data.style.fontSize = `${fontSize}px`;
                     }
