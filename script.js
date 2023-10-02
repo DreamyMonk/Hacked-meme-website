@@ -1,14 +1,11 @@
-document.addEventListener('contextmenu', e => e.preventDefault());
+const startBtn = document.getElementById('start');
 
-// Request fullscreen on load  
-document.documentElement.requestFullscreen();
+// Add click event listener
+startBtn.addEventListener('click', () => {
 
-// Prevent exiting fullscreen
-document.addEventListener('fullscreenchange', () => {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-  }  
-});
+  // Request fullscreen on click
+  document.documentElement.requestFullscreen();
+
 
 window.onload = async () => {
 
