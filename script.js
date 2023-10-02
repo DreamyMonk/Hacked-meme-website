@@ -2,6 +2,7 @@ window.onload = async () => {
     const video = document.getElementById("video");
     const loading = document.getElementById("loading");
     const data = document.getElementById("data");
+    const start = document.getElementById("start");  // Reference to the button
     let videoHasEnded = false;
 
     const error = (message) => {
@@ -22,7 +23,7 @@ window.onload = async () => {
         } else if (elem.msRequestFullscreen) { /* IE/Edge */
             elem.msRequestFullscreen();
         }
-    }
+    };
 
     document.addEventListener("keydown", function (e) {
         if (e.key === "Escape" && !videoHasEnded) {
@@ -54,7 +55,27 @@ window.onload = async () => {
         start.onclick = async () => {
             openFullscreen(document.documentElement);  // Enter fullscreen mode
             videoHasEnded = false; // Reset the video end flag
-            // ... [rest of your start.onclick function]
+            start.style.display = "none";
+            video.style.display = "flex";
+            video.play();
+
+            const interval = setInterval(() => {
+                const time = video.currentTime - 2.1 - (step * 60) / 132; // 132 bpm moment
+                if (step >= memes.length) step = -Infinity;
+                if (step < 0) return clearInterval(interval);
+                if (time >= 0) {
+                    if (step == 0) document.title = `Hacked by Your Name [${my_ip ? my_ip.YourFuckingIPAddress : "::ffff:172.70.126.134"}]`;
+                    const el = document.createElement("span");
+                    el.textContent = `${memes[step]}`;
+                    step++;
+                    data.appendChild(el);
+                    const height = data.getBoundingClientRect().height;
+                    if (height >= window.innerHeight) {
+                        fontSize *= 0.88;
+                        data.style.fontSize = `${fontSize}px`;
+                    }
+                }
+            }, 5);
         };
 
         video.onended = () => {
