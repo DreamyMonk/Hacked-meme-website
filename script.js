@@ -28,23 +28,6 @@ const closeFullscreen = () => {
     }
 }
 
-const preventDefaultFunction = (e) => e.preventDefault();
-const preventEscapeFunction = (e) => {
-    if (e.key === 'Escape' || e.keyCode === 27) {
-        e.preventDefault();
-    }
-};
-
-document.addEventListener('contextmenu', preventDefaultFunction);
-document.addEventListener('keydown', preventEscapeFunction);
-
-// Re-enable after 30 seconds
-setTimeout(() => {
-    document.removeEventListener('contextmenu', preventDefaultFunction);
-    document.removeEventListener('keydown', preventEscapeFunction);
-}, 30000);
-
-});
 
 window.onload = async () => {
 
