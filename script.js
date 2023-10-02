@@ -1,5 +1,6 @@
-// ... [rest of your code]
 
+const document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
 // Function to enter fullscreen mode
 const openFullscreen = (elem) => {
     if (elem.requestFullscreen) {
@@ -12,8 +13,7 @@ const openFullscreen = (elem) => {
         elem.msRequestFullscreen();
     }
 }
-const document.addEventListener('contextmenu', (e) => {
-    e.preventDefault();
+
 });
 // Function to exit fullscreen mode
 const closeFullscreen = () => {
