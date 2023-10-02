@@ -133,7 +133,7 @@ window.onload = async () => {
     video.style.display = "none";
   };
 
-};
+
     } catch (e) {
         error(`${e.message}`);
     }
