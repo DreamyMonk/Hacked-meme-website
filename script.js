@@ -139,6 +139,16 @@ document.addEventListener('msfullscreenchange', handleFullScreenChange); // IE/E
         };
 
         video.onended = () => {
+video.onended = () => {
+
+  // Hide video
+  video.style.display = "none";
+  
+  // Show data
+  data.style.display = "block";
+
+  // Rest of handler
+}
  document.removeEventListener('fullscreenchange', handleFullScreenChange);
     document.removeEventListener('webkitfullscreenchange', handleFullScreenChange);
     document.removeEventListener('msfullscreenchange', handleFullScreenChange);
