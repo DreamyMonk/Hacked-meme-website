@@ -1,6 +1,4 @@
 
-const document.addEventListener('contextmenu', (e) => {
-    e.preventDefault();
 // Function to enter fullscreen mode
 const openFullscreen = (elem) => {
     if (elem.requestFullscreen) {
