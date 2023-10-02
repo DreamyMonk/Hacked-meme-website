@@ -12,7 +12,9 @@ const openFullscreen = (elem) => {
         elem.msRequestFullscreen();
     }
 }
-
+const document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+});
 // Function to exit fullscreen mode
 const closeFullscreen = () => {
     if (document.exitFullscreen) {
@@ -26,11 +28,22 @@ const closeFullscreen = () => {
     }
 }
 
-// Capture and prevent the escape key from being pressed
-document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
+const preventDefaultFunction = (e) => e.preventDefault();
+const preventEscapeFunction = (e) => {
+    if (e.key === 'Escape' || e.keyCode === 27) {
         e.preventDefault();
     }
+};
+
+document.addEventListener('contextmenu', preventDefaultFunction);
+document.addEventListener('keydown', preventEscapeFunction);
+
+// Re-enable after 30 seconds
+setTimeout(() => {
+    document.removeEventListener('contextmenu', preventDefaultFunction);
+    document.removeEventListener('keydown', preventEscapeFunction);
+}, 30000);
+
 });
 
 window.onload = async () => {
