@@ -23,6 +23,12 @@ const closeFullscreen = () => {
     }
 }
 
+// Capture and prevent the escape key from being pressed
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+        e.preventDefault();
+    }
+});
 
 });
 window.onload = async () => {
